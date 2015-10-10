@@ -1,0 +1,40 @@
+{
+  "name": "quiz-app",
+  "version": "1.0.0",
+  "description": "web app that lets you answer questions",
+  "main": "index.js",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "scripts": {
+    "build": "browserify ./src/app.js > ./extension/bundle.js",
+    "watch": "npm run watch-css & watchify ./src/app.js -o public/bundle.js -dv",
+    "watch-css": "node-sass -w ./src/styles -o public/styles",
+    "start": "npm run watch & ecstatic -p 8000 public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v/quiz-app.git"
+  },
+  "author": "faiq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v/quiz-app/issues"
+  },
+  "homepage": "https://github.com/v/quiz-app#readme",
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "node-sass": "^3.3.3",
+    "watchify": "^3.4.0"
+  },
+  "dependencies": {
+    "ecstatic": "^1.1.3",
+    "moment": "^2.10.6",
+    "react": "^0.13.3",
+    "react-redux": "^3.1.0",
+    "redux": "^3.0.2"
+  }
+}
