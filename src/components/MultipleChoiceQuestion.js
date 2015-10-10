@@ -4,7 +4,7 @@ export default class MultipleChoiceQuestion extends React.Component {
   render() {
     const {text, choices} = this.props
 
-    const choiceHtml = choices.map(function(choice, i) {
+    const choiceHtml = choices.map((choice, i) => {
       return (
         <li className="choice" key={i}>{choice}</li>
       )
