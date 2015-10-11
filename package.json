@@ -12,9 +12,7 @@
     "build": "browserify ./src/index.js > ./extension/bundle.js",
     "watch": "npm run watch-css & watchify ./src/index.js -o public/bundle.js -dv",
     "watch-css": "node-sass -w ./src/styles -o public/styles",
-    "start": "npm run watch & ecstatic -p 8000 public",
-    "watch-webpack": "webpack --watch",
-    "start-webpack": "npm run watch-webpack & ecstatic -p 8000 public"
+    "start": "npm run watch & ecstatic -p 8000 public"
   },
   "repository": {
     "type": "git",
