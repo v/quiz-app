@@ -7,18 +7,18 @@ import { markQuestion, nextQuestion, prevQuestion } from './actions'
 
 class App extends React.Component {
   constructor (props) {
-    super(props)
+    super(props) 
     this.onNext = this.onNext.bind(this)
     this.onPrev = this.onPrev.bind(this)
     this.onCheck = this.onCheck.bind(this)
   }
 
-  onPrev (number) {
+  onPrev (number) { 
     const { dispatch } = this.props
     dispatch(prevQuestion(number))
   }
 
-  onNext (number) {
+  onNext (number) { 
     const { dispatch } = this.props
     dispatch(nextQuestion(number))
   }
@@ -37,7 +37,7 @@ class App extends React.Component {
     ]
 
     let total = 35
-    const { dispatch, currentQuestion, checkQuestion } = this.props
+    const { dispatch, currentQuestion, checkQuestion } = this.props 
     return  (
       <div className="container">
         <div className="marked"> { checkQuestion ? 'marked' : 'unmarked' } </div>
@@ -50,8 +50,8 @@ class App extends React.Component {
 }
 
 //defines props to inject into App
-function select (state) {
-  return {
+function select (state) { 
+  return { 
     currentQuestion: state.currentQuestion,
     checkQuestion: state.checkQuestion
    }
