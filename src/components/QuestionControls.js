@@ -9,19 +9,19 @@ export default class QuestionControls extends React.Component {
   }
 
   render() {
-    const { number, total } = this.props
+    const { number, total, onPrev, onNext } = this.props
 
     let buttons = []
 
     if (number > 1) {
       buttons.push(
-        <button key="1"> Previous </button>
+        <button key="1" onClick={() => onPrev(number) }> Previous </button>
       )
     }
 
     if (number < total) {
       buttons.push(
-        <button key="2"> Next </button>
+        <button key="2" onClick={() => onNext(number) }> Next </button>
       )
     }
 

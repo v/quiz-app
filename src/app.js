@@ -3,9 +3,31 @@ import { connect } from 'react-redux'
 import MultipleChoiceQuestion from './components/MultipleChoiceQuestion'
 import QuestionControls from './components/QuestionControls'
 import QuestionCounter from './components/QuestionCounter'
-import { markQuestion } from './actions'
+import { markQuestion, nextQuestion, prevQuestion } from './actions'
 
 class App extends React.Component {
+  constructor (props) {
+    super(props) 
+    this.onNext = this.onNext.bind(this)
+    this.onPrev = this.onPrev.bind(this)
+    this.onCheck = this.onCheck.bind(this)
+  }
+
+  onPrev (number) { 
+    const { dispatch } = this.props
+    dispatch(prevQuestion(number))
+  }
+
+  onNext (number) { 
+    const { dispatch } = this.props
+    dispatch(nextQuestion(number))
+  }
+
+  onCheck(value, questionNumber) {
+    const { dispatch } = this.props
+    dispatch(markQuestion(value, questionNumber))
+  }
+
   render() {
     let choices = [
       '1',
@@ -14,20 +36,25 @@ class App extends React.Component {
       '4',
     ]
 
-    let number = 2
     let total = 35
-    const { dispatch } = this.props 
+    const { dispatch, currentQuestion, checkQuestion } = this.props 
     return  (
       <div className="container">
-        <QuestionCounter number={number} total={total} />
+        <div className="marked"> { checkQuestion ? 'marked' : 'unmarked' } </div>
+        <QuestionCounter number={currentQuestion} total={total} />
         <MultipleChoiceQuestion text="What is square root of 2?" choices={choices} />
-        <QuestionControls number={number} total={total} onMarkQuestion={ (value, questionNumber) => {
-            dispatch(markQuestion(value, questionNumber))
-          }
-        }/>
+        <QuestionControls number={currentQuestion} total={total} onMarkQuestion={this.onCheck} onPrev={this.onPrev} onNext={this.onNext} />
       </div>
     )
   }
 }
 
-export default connect()(App)
+//defines props to inject into App
+function select (state) { 
+  return { 
+    currentQuestion: state.currentQuestion,
+    checkQuestion: state.checkQuestion
+   }
+}
+
+export default connect(select)(App)
