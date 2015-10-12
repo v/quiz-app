@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { findDOMNode }  from 'react'
 
 export default class MultipleChoiceQuestion extends React.Component {
+
+  submitQuestion (e) {
+    const { index, submit } = this.props
+    const response = findDOMNode(this.refs.options).children[0].value //get the dom element for the input
+    submit(index, response)
+  }
+
   render() {
-    const {text, choices} = this.props
+    const {text, choices, index } = this.props
 
     const choiceHtml = choices.map((choice, i) => {
       return (
-        <li className="choice" key={i}>{choice}</li>
+        <li ref="options">
+          <input name="question" value={choice} type="radio" name={index}> 
+            {choice}
+          </input>
+        </li>
       )
     })
 
@@ -17,6 +28,7 @@ export default class MultipleChoiceQuestion extends React.Component {
         <ul className="choices">
           {choiceHtml}
         </ul>
+        <button type="submit" onClick={ (e) => this.submitQuestion(e)}>Submit Question</button>
       </div>
     )
   }

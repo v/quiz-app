@@ -3,16 +3,26 @@ import { connect } from 'react-redux'
 import MultipleChoiceQuestion from './components/MultipleChoiceQuestion'
 import QuestionControls from './components/QuestionControls'
 import QuestionCounter from './components/QuestionCounter'
-import { markQuestion, nextQuestion, prevQuestion } from './actions'
+import { markQuestion, nextQuestion, prevQuestion, submitQuestion, getQuestions } from './actions'
 
 class App extends React.Component {
   constructor (props) {
-    super(props) 
+    super(props)
     this.onNext = this.onNext.bind(this)
     this.onPrev = this.onPrev.bind(this)
     this.onCheck = this.onCheck.bind(this)
+    this.submitAnswer = this.submitAnswer.bind(this)
   }
 
+  componentWillMount () {
+    const { dispatch } = this.props
+    dispatch(getQuestions())
+  }
+ 
+  submitAnswer (index, response) { 
+    const { dispatch } = this.props
+    dispatch(submitQuestion(index, response))
+  }
   onPrev (number) { 
     const { dispatch } = this.props
     dispatch(prevQuestion(number))
@@ -29,21 +39,13 @@ class App extends React.Component {
   }
 
   render() {
-    let choices = [
-      '1',
-      '2',
-      '3',
-      '4',
-    ]
-
-    let total = 35
-    const { dispatch, currentQuestion, checkQuestion } = this.props 
+    const { questions, currentQuestionIndex } = this.props 
+    let currentQuestion = questions.length ? questions[currentQuestionIndex] : { text: '', choices: [] } 
     return  (
       <div className="container">
-        <div className="marked"> { checkQuestion ? 'marked' : 'unmarked' } </div>
-        <QuestionCounter number={currentQuestion} total={total} />
-        <MultipleChoiceQuestion text="What is square root of 2?" choices={choices} />
-        <QuestionControls number={currentQuestion} total={total} onMarkQuestion={this.onCheck} onPrev={this.onPrev} onNext={this.onNext} />
+        <QuestionCounter number={currentQuestionIndex + 1} total={questions.length} />
+        <MultipleChoiceQuestion text={currentQuestion.text} choices={currentQuestion.choices} index={currentQuestionIndex} submit={this.submitAnswer}/>
+        <QuestionControls number={currentQuestionIndex + 1} total={questions.length} onMarkQuestion={this.onCheck} onPrev={this.onPrev} onNext={this.onNext} />
       </div>
     )
   }
@@ -52,8 +54,8 @@ class App extends React.Component {
 //defines props to inject into App
 function select (state) { 
   return { 
-    currentQuestion: state.currentQuestion,
-    checkQuestion: state.checkQuestion
+    currentQuestionIndex: state.currentQuestionIndex,
+    questions: state.questions
    }
 }
 

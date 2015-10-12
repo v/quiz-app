@@ -5,18 +5,46 @@ export const SUBMIT_QUESTION = 'SUBMIT_QUESTION'
 export const MARK_QUESTION = 'MARK_QUESTION'
 
 // action creators for are view controllers 
-export function nextQuestion (currentNum) {
-  return { type: NEXT_QUESTION, currentNum }
+export function nextQuestion (index) {
+  return { type: NEXT_QUESTION, index }
 }
 
-export function prevQuestion (currentNum) {
-  return { type: PREV_QUESTION, currentNum }
+export function prevQuestion (index) {
+  return { type: PREV_QUESTION, index }
 }
 
-export function markQuestion (value, currentNum) {
-  return { type: MARK_QUESTION, value, currentNum }
+export function markQuestion (index, value) {
+  return { type: MARK_QUESTION, value, index }
 }
 
-export function submitQuestion(currentNum, response) {
-  return { type: SUBMIT_QUESTION, currentNum, response }
-} 
+export function submitQuestion(index, value) {
+  return { type: SUBMIT_QUESTION, index, value }
+}
+
+export function getQuestions() { 
+  return { 
+    type: 'GET_QUESTIONS',
+    questions: [
+      { 
+        text: "what's the sqrt of 4",
+        options: [1, 2, 3, 4],
+        marked: "",
+        answer: ""
+
+      }, 
+      { 
+        text: "what's the sqrt of 16",
+        options: [1, 2, 3, 4],
+        marked: "",
+        answer: ""
+
+      }, 
+      {
+        text: "what's the sqrt of 9",
+        options: [1, 2, 3, 4],
+        marked: "",
+        answer: ""
+      }
+    ]
+  }
+}

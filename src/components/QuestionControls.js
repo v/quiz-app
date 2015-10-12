@@ -5,7 +5,7 @@ export default class QuestionControls extends React.Component {
   clickHandler (e) {
     const node = findDOMNode(this.refs.markbox) //get the dom element for the input
     let value = node.checked
-    this.props.onMarkQuestion(value, this.props.number) //calls a function set by its parent
+    this.props.onMarkQuestion(this.props.number, value) //calls a function set by its parent
   }
 
   render() {
