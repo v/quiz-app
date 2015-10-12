@@ -45,7 +45,7 @@ class App extends React.Component {
       <div className="container">
         <QuestionCounter number={currentQuestionIndex + 1} total={questions.length} />
         <MultipleChoiceQuestion text={currentQuestion.text} choices={currentQuestion.choices} index={currentQuestionIndex} submit={this.submitAnswer}/>
-        <QuestionControls number={currentQuestionIndex + 1} total={questions.length} onMarkQuestion={this.onCheck} onPrev={this.onPrev} onNext={this.onNext} />
+        <QuestionControls number={currentQuestionIndex} total={questions.length - 1} onMarkQuestion={this.onCheck} onPrev={this.onPrev} onNext={this.onNext} />
       </div>
     )
   }

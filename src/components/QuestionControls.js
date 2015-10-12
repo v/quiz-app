@@ -13,7 +13,7 @@ export default class QuestionControls extends React.Component {
 
     let buttons = []
 
-    if (number > 1) {
+    if (number > 0) {
       buttons.push(
         <button key="1" onClick={() => onPrev(number) }> Previous </button>
       )

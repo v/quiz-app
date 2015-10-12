@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 function currentQuestionIndex (state = 0, action) {
   switch (action.type) { 
     case PREV_QUESTION: 
-      if (state > 1) return state-1
+      if (state > 0) return state-1
       else return state 
 
     case NEXT_QUESTION:
