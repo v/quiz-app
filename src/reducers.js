@@ -34,7 +34,7 @@ function questions (state = [], action) {
          ] 
     case 'GET_QUESTIONS':
          console.log(action.questions)
-         return action.questions
+         return action.questions.slice(0)
     default:
        return state 
    }

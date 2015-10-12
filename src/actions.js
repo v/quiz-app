@@ -27,21 +27,21 @@ export function getQuestions() {
     questions: [
       { 
         text: "what's the sqrt of 4",
-        options: [1, 2, 3, 4],
+        choices: [1, 2, 3, 4],
         marked: "",
         answer: ""
 
       }, 
       { 
         text: "what's the sqrt of 16",
-        options: [1, 2, 3, 4],
+        choices: [1, 2, 3, 4],
         marked: "",
         answer: ""
 
       }, 
       {
         text: "what's the sqrt of 9",
-        options: [1, 2, 3, 4],
+        choices: [1, 2, 3, 4],
         marked: "",
         answer: ""
       }
